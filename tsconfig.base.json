@@ -15,9 +15,9 @@
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
     "paths": {
-      "@./filters": ["libs/ui-kit/filters/src/index.ts"],
-      "@./orders": ["libs/orders/src/index.ts"],
-      "@./products": ["libs/products/src/index.ts"]
+      "@filters": ["libs/ui-kit/filters/src/index.ts"],
+      "@orders": ["libs/orders/src/index.ts"],
+      "@products": ["libs/products/src/index.ts"]
     }
   },
   "exclude": ["node_modules", "tmp"]

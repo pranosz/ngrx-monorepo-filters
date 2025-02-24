@@ -1,0 +1,11 @@
+<form [formGroup]="form">
+    <h4>Regions filter</h4>
+    <mat-form-field *ngIf="regions?.length">
+      <mat-label>Regions</mat-label>
+      <mat-select formControlName="region">
+        <mat-option *ngFor="let region of regions" [value]="region">
+            {{region}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+</form>
