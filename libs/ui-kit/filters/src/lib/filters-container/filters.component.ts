@@ -5,6 +5,6 @@ import { CommonModule } from '@angular/common';
   selector: 'filters-container',
   imports: [CommonModule],
   templateUrl: './filters.component.html',
-  styleUrl: './filters.component.css',
+  styleUrl: './filters.component.scss',
 })
 export class FiltersComponent {}
