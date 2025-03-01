@@ -1,4 +1,4 @@
-import { Component, EventEmitter, inject, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, inject, Input, OnInit, Output } from '@angular/core';
 import { MatSelectModule } from '@angular/material/select';
 import { FormBuilder, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { MatFormFieldModule } from '@angular/material/form-field';
@@ -22,9 +22,11 @@ export class RegionsComponent implements OnInit {
   private readonly fb = inject(FormBuilder);
   form!: FormGroup; 
   regions = ['eu','us','uk','hk','cn'];
+  @Input() groupName!: string;
   @Output() filterChanged: EventEmitter<string> = new EventEmitter<string>();
 
   ngOnInit(): void {
+    console.log('groupName ', this.groupName);
     this.form = this.fb.group({
       region: this.regions[0]
     });

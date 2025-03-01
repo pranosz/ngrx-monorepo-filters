@@ -1,4 +1,4 @@
-import { Component, EventEmitter, inject, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, inject, Input, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
@@ -16,9 +16,11 @@ import { MatInputModule } from '@angular/material/input';
 export class NameComponent implements OnInit {
   private readonly fb = inject(FormBuilder);
   form!: FormGroup; 
+  @Input() groupName!: string;
   @Output() filterChanged: EventEmitter<string> = new EventEmitter<string>();
 
   ngOnInit(): void {
+    console.log(' name ', this.groupName);
     this.form = this.fb.group({
       name: ''
     });

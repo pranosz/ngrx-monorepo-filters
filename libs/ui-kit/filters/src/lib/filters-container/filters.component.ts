@@ -1,10 +1,14 @@
-import { Component } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { RegionsComponent } from '../regions/regions.component';
+import { NameComponent } from '../name/name.component';
 
 @Component({
   selector: 'filters-container',
-  imports: [CommonModule],
+  imports: [],
   templateUrl: './filters.component.html',
   styleUrl: './filters.component.scss',
 })
-export class FiltersComponent {}
+export class FiltersComponent {
+
+
+}
