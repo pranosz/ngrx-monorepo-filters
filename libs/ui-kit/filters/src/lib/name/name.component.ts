@@ -2,6 +2,7 @@ import { Component, EventEmitter, inject, Input, OnInit, Output } from '@angular
 import { FormBuilder, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
+import { FiltersDispatcherMap } from '../services/filters.dispatcher.map';
 
 @Component({
   selector: 'filter-name',
@@ -15,6 +16,7 @@ import { MatInputModule } from '@angular/material/input';
 })
 export class NameComponent implements OnInit {
   private readonly fb = inject(FormBuilder);
+  private readonly filtersDispatcherMap = inject(FiltersDispatcherMap);
   form!: FormGroup; 
   @Input() groupName!: string;
   @Output() filterChanged: EventEmitter<string> = new EventEmitter<string>();
@@ -26,7 +28,11 @@ export class NameComponent implements OnInit {
     });
 
     this.form.valueChanges.subscribe(name => {
-      console.log('name ', name);
+      this.filtersDispatcherMap.dispatchAction({
+        groupName: this.groupName,
+        filterType: 'name',
+        filterValue: name
+      });
       this.filterChanged.emit(name);
     });
   }

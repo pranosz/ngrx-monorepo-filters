@@ -1,19 +1,19 @@
-import { Filters } from "./filter-model";
+import { Filter } from "../models/filter.model";
 
 export interface FiltersState {
-    products: Filters;
-    orders: Filters;
+    products: Filter;
+    orders: Filter;
   }
   
   export const initialState: FiltersState = {
     products: {
-        regions: [],
+        region: '',
         name: '',
         env: '',
         teamId: ''
     },
     orders: {
-        regions: [],
+        region: '',
         name: '',
         env: '',
         teamId: ''

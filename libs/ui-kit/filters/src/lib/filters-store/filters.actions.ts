@@ -1,7 +1,25 @@
 import { createAction, props } from '@ngrx/store';
-import { Filters } from './filter-model';
+
+// Products
 
 export const setRegionsProductsFilters = createAction(
-    '[Filters] Set Filter Value',
-    props<{regions: string[]}>()
+    '[Filters] Set Regions Products Filter',
+    props<{region: string}>()
+);
+
+export const setNameProductsFilters = createAction(
+    '[Filters] Set Name Products Filter',
+    props<{name: string}>()
+);
+
+// Orders
+
+export const setRegionsOrdersFilters = createAction(
+    '[Filters] Set Regions Products Filter',
+    props<{region: string}>()
+);
+
+export const setNameOrdersFilters = createAction(
+    '[Filters] Set Name Products Filter',
+    props<{name: string}>()
 );

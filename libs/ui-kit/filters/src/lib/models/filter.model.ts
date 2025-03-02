@@ -1,5 +1,5 @@
-export interface Filters {
-    regions?: string[];
+export interface Filter {
+    region?: string;
     name?: string;
     env?: string;
     teamId?: string
