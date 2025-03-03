@@ -1,45 +1,41 @@
 import { inject, Injectable } from "@angular/core";
 import { Store } from '@ngrx/store';
-import { Observable, of } from "rxjs";
+import { Observable, of, tap } from "rxjs";
 import { FiltersSelectors } from "../models/filters-selectors.model";
-import { 
-    selectOrdersNameFilter, 
-    selectOrdersRegionsFilter, 
-    selectProductsNameFilter, 
-    selectProductsRegionsFilter 
-} from "../filters-store/filters.selectors";
+import { selectProductsNameFilter, selectProductsRegionsFilter } from "../products/filters-store/filters.selectors";
+import { selectOrdersNameFilter, selectOrdersRegionsFilter } from "../orders/filters-store/filters.selectors";
 
 @Injectable({
     providedIn: 'root'
 })
 export class FiltersSelectorsMap {
     private readonly filtersStore = inject(Store);
-    private readonly filtersSelectorsMap: Map<object, () => Observable<string | undefined>> = new Map();
+    private readonly filtersSelectorsMap: Map<string, () => Observable<string>> = new Map();
 
     constructor(){
         this.filtersSelectorsMap.set(
-            {filterGroup: 'products', filterType: 'regions'}, 
+            'products_regions', 
             () => this.filtersStore.select(selectProductsRegionsFilter)
         );
         this.filtersSelectorsMap.set(
-            {filterGroup: 'products', filterType: 'name'}, 
+            'products_name', 
             () => this.filtersStore.select(selectProductsNameFilter)
         );
         this.filtersSelectorsMap.set(
-            {filterGroup: 'orders', filterType: 'regions'}, 
+            'orders_regions', 
             () => this.filtersStore.select(selectOrdersRegionsFilter)
         );
         this.filtersSelectorsMap.set(
-            {filterGroup: 'orders', filterType: 'name'}, 
+            'orders_name', 
             () => this.filtersStore.select(selectOrdersNameFilter)
         );
     }
 
-    selectAction(filtersSelectors: FiltersSelectors): Observable<string | undefined> {
-        const action = this.filtersSelectorsMap.get(filtersSelectors);
-        console.log('selectAction ', action);
+    selectAction(filtersSelectors: FiltersSelectors): Observable<string> {
+        const key = `${filtersSelectors.groupName}_${filtersSelectors.filterType}`;
+        const action = this.filtersSelectorsMap.get(key);
 
-        if(!action) return of(undefined);
+        if(!action) return of();
             
         return action();
     }

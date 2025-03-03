@@ -5,14 +5,19 @@ import { provideAnimations } from '@angular/platform-browser/animations';
 import { provideStore } from '@ngrx/store';
 import { provideEffects } from '@ngrx/effects';
 import { provideStoreDevtools } from '@ngrx/store-devtools';
-import { filtersReducer } from '@filters';
+import { ordersfiltersReducer, productsfiltersReducer } from '@filters';
 
 export const appConfig: ApplicationConfig = {
   providers: [
     provideAnimations(),
     provideZoneChangeDetection({ eventCoalescing: true }),
     provideRouter(appRoutes),
-    provideStore({ filters: filtersReducer }),
+    provideStore(
+      { 
+        productsFiltersState: productsfiltersReducer,
+        ordersFiltersState: ordersfiltersReducer
+      }
+    ),
     // provideEffects([YourFeatureEffects]),
     provideStoreDevtools({ maxAge: 25, logOnly: false })
   ],

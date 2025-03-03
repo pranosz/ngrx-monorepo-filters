@@ -1,5 +1,7 @@
-import { FiltersState } from "./filters-store/filters.state";
+import { OrdersFiltersState } from "./orders/filters-store/filters.state";
+import { ProductsFiltersState } from "./products/filters-store/filters.state";
 
 export interface AppState {
-    filters: FiltersState;
+    productsFiltersState: ProductsFiltersState;
+    ordersFiltersState: OrdersFiltersState;
 }

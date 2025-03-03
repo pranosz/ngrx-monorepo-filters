@@ -6,6 +6,7 @@ import { MatInputModule } from '@angular/material/input';
 import { NgFor, NgIf } from '@angular/common';
 import { FiltersDispatcherMap } from '../services/filters.dispatcher.map';
 import { FiltersSelectorsMap } from '../services/filters.selectors.map';
+import { distinctUntilChanged } from 'rxjs';
 
 @Component({
   selector: 'filter-regions',
@@ -26,6 +27,7 @@ export class RegionsComponent implements OnInit {
   private readonly filtersSelectorsMap = inject(FiltersSelectorsMap);
   form!: FormGroup; 
   regions = ['eu','us','uk','hk','cn'];
+  savedRegion: string | undefined = '';
   @Input() groupName!: string;
   @Output() filterChanged: EventEmitter<string> = new EventEmitter<string>();
 
@@ -39,15 +41,15 @@ export class RegionsComponent implements OnInit {
         groupName: this.groupName, 
         filterType: 'regions'
       }
-    ).subscribe(filterValue => {
-      this.form.get('region')?.setValue(filterValue);
+    ).pipe(distinctUntilChanged()).subscribe(filterValue => {
+      this.form.patchValue({region: filterValue});
     });
 
-    this.form.valueChanges.subscribe(region => {
+    this.form.valueChanges.subscribe(value => {
       this.filtersDispatcherMap.dispatchAction({
         groupName: this.groupName,
         filterType: 'regions',
-        filterValue: region
+        filterValue: value.region
       });
     });
   }
