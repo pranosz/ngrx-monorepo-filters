@@ -9,6 +9,4 @@ import { NameComponent } from '../name/name.component';
   styleUrl: './filters.component.scss',
 })
 export class FiltersComponent {
-
-
 }
